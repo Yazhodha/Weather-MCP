@@ -2,6 +2,8 @@
 
 A comprehensive Model Context Protocol (MCP) server for weather data, built with .NET 8 and Clean Architecture principles. This server provides Claude Desktop with access to real-time weather information, forecasts, alerts, and weather-related calculations.
 
+
+
 ## 🌤️ Features
 
 ### Weather Tools
@@ -53,8 +55,8 @@ This project follows Clean Architecture principles:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/Yazhodha/weather-mcp-webapi.git
-   cd weather-mcp-webapi
+   git clone https://github.com/Yazhodha/Weather-MCP.git
+   cd weather-mcp
    ```
 
 2. **Build the project**
@@ -262,7 +264,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### Getting Help
 
-- Check the [Issues](https://github.com/Yazhodha/weather-mcp-webapi/issues) page
+- Check the [Issues](https://github.com/Yazhodha/Weather-MCP/issues) page
 - Review Claude Desktop [MCP documentation](https://modelcontextprotocol.io/)
 - Ensure your .NET 8 installation is up to date
 

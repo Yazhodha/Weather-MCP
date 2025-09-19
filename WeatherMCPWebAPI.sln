@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# 
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherMCPWebAPI", "WeatherMCPWebAPI\WeatherMCPWebAPI.csproj", "{9744BDA8-F9E1-4984-9E24-C2A028531CB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherMCPWebAPI.Domain", "WeatherMCPWebAPI.Domain\WeatherMCPWebAPI.Domain.csproj", "{539654C8-2F2E-46D7-A93E-7BD737E05918}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherMCPWebAPI.Application", "WeatherMCPWebAPI.Application\WeatherMCPWebAPI.Application.csproj", "{C0545C62-DBE4-4B57-A02B-31D97AD2ABBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherMCPWebAPI.Infrastructure", "WeatherMCPWebAPI.Infrastructure\WeatherMCPWebAPI.Infrastructure.csproj", "{53DE77AD-E26C-4C8B-ABAD-D71AF4763ABE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9744BDA8-F9E1-4984-9E24-C2A028531CB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9744BDA8-F9E1-4984-9E24-C2A028531CB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9744BDA8-F9E1-4984-9E24-C2A028531CB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9744BDA8-F9E1-4984-9E24-C2A028531CB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{539654C8-2F2E-46D7-A93E-7BD737E05918}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{539654C8-2F2E-46D7-A93E-7BD737E05918}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{539654C8-2F2E-46D7-A93E-7BD737E05918}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{539654C8-2F2E-46D7-A93E-7BD737E05918}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0545C62-DBE4-4B57-A02B-31D97AD2ABBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0545C62-DBE4-4B57-A02B-31D97AD2ABBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0545C62-DBE4-4B57-A02B-31D97AD2ABBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0545C62-DBE4-4B57-A02B-31D97AD2ABBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53DE77AD-E26C-4C8B-ABAD-D71AF4763ABE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53DE77AD-E26C-4C8B-ABAD-D71AF4763ABE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53DE77AD-E26C-4C8B-ABAD-D71AF4763ABE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53DE77AD-E26C-4C8B-ABAD-D71AF4763ABE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

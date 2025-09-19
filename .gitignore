@@ -1,0 +1,9 @@
+.idea/
+WeatherMCPWebAPI.Infrastructure/obj/
+WeatherMCPWebAPI.Infrastructure/bin/
+WeatherMCPWebAPI/bin/
+WeatherMCPWebAPI/obj/
+WeatherMCPWebAPI.Domain/obj/
+WeatherMCPWebAPI.Application/obj/
+WeatherMCPWebAPI.Application/bin/
+WeatherMCPWebAPI.Domain/bin/

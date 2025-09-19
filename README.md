@@ -53,7 +53,7 @@ This project follows Clean Architecture principles:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/weather-mcp-webapi.git
+   git clone https://github.com/Yazhodha/weather-mcp-webapi.git
    cd weather-mcp-webapi
    ```
 
@@ -262,7 +262,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### Getting Help
 
-- Check the [Issues](https://github.com/yourusername/weather-mcp-webapi/issues) page
+- Check the [Issues](https://github.com/Yazhodha/weather-mcp-webapi/issues) page
 - Review Claude Desktop [MCP documentation](https://modelcontextprotocol.io/)
 - Ensure your .NET 8 installation is up to date
 

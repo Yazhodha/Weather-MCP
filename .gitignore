@@ -7,3 +7,5 @@ WeatherMCPWebAPI.Domain/obj/
 WeatherMCPWebAPI.Application/obj/
 WeatherMCPWebAPI.Application/bin/
 WeatherMCPWebAPI.Domain/bin/
+published/appsettings.Development.json
+published/

@@ -5,7 +5,24 @@ using WeatherMCPWebAPI.Application.Services;
 using WeatherMCPWebAPI.Infrastructure.External;
 using WeatherMCPWebAPI.Tools;
 
-var builder = WebApplication.CreateBuilder(args);
+// Detect if running as MCP server and configure accordingly
+var isMcpMode = args.Length == 0 && Environment.GetEnvironmentVariable("TERM_PROGRAM") == null;
+
+var builder = WebApplication.CreateBuilder(new WebApplicationOptions
+{
+    Args = args,
+    ContentRootPath = Directory.GetCurrentDirectory(),
+    WebRootPath = "wwwroot"
+});
+
+// Suppress startup messages in MCP mode
+if (isMcpMode)
+{
+    builder.WebHost.ConfigureKestrel(options =>
+    {
+        options.Listen(System.Net.IPAddress.Loopback, 0); // Use any available port, we don't need HTTP in MCP mode
+    });
+}
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -42,69 +59,60 @@ builder.Services.AddHealthChecks();
 
 // Configure logging - suppress console output for MCP stdio mode
 builder.Logging.ClearProviders();
-if (Environment.GetEnvironmentVariable("MCP_MODE") == "stdio")
+if (!isMcpMode)
 {
-    builder.Logging.AddEventLog(); // Use event log instead of console for MCP mode
-}
-else
-{
-    builder.Logging.AddConsole(); // Normal console logging for development
+    builder.Logging.AddConsole(); // Only add console logging when not in MCP mode
 }
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+// Configure the HTTP request pipeline only when not in MCP mode
+if (!isMcpMode)
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
+
+    app.UseHttpsRedirection();
+    app.UseCors();
+    app.UseAuthorization();
+    app.MapControllers();
+    app.MapHealthChecks("/health");
+
+    // Add tools debug endpoint
+    app.MapGet("/mcp/tools", () =>
+    {
+        var tools = new[]
+        {
+            new { name = "GetCurrentWeather", description = "Get current weather conditions for a specified city" },
+            new { name = "GetWeatherForecast", description = "Get weather forecast for the next 1-5 days" },
+            new { name = "GetWeatherAlerts", description = "Get active weather alerts and warnings" },
+            new { name = "CompareWeather", description = "Compare weather between two cities" },
+            new { name = "GetWeatherHistory", description = "Get historical weather data" },
+            new { name = "ConvertTemperature", description = "Convert temperature between units" },
+            new { name = "CalculateHeatIndex", description = "Calculate heat index from temperature and humidity" },
+            new { name = "GetSunriseSunset", description = "Get sunrise and sunset times" }
+        };
+        return Results.Ok(new { tools });
+    });
+
+    // Add simple tool testing endpoints
+    app.MapGet("/weather/current/{city}", async ([FromServices] WeatherTools weatherTools, string city) =>
+    {
+        var result = await weatherTools.GetCurrentWeather(city);
+        return Results.Ok(new { city, weather = result });
+    });
+
+    app.MapGet("/weather/forecast/{city}", async ([FromServices] WeatherTools weatherTools, string city, int days = 5) =>
+    {
+        var result = await weatherTools.GetWeatherForecast(city, days);
+        return Results.Ok(new { city, days, forecast = result });
+    });
+
+    app.MapGet("/test", () => "Weather MCP Web API is running!");
 }
 
-app.UseHttpsRedirection();
-
-// Enable CORS
-app.UseCors();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-// Add health check endpoint
-app.MapHealthChecks("/health");
-
-// MCP Server will handle stdio communication automatically
-
-// Add tools debug endpoint
-app.MapGet("/mcp/tools", () =>
-{
-    var tools = new[]
-    {
-        new { name = "GetCurrentWeather", description = "Get current weather conditions for a specified city" },
-        new { name = "GetWeatherForecast", description = "Get weather forecast for the next 1-5 days" },
-        new { name = "GetWeatherAlerts", description = "Get active weather alerts and warnings" },
-        new { name = "CompareWeather", description = "Compare weather between two cities" },
-        new { name = "GetWeatherHistory", description = "Get historical weather data" },
-        new { name = "ConvertTemperature", description = "Convert temperature between units" },
-        new { name = "CalculateHeatIndex", description = "Calculate heat index from temperature and humidity" },
-        new { name = "GetSunriseSunset", description = "Get sunrise and sunset times" }
-    };
-    return Results.Ok(new { tools });
-});
-
-// Add simple tool testing endpoints
-app.MapGet("/weather/current/{city}", async ([FromServices] WeatherTools weatherTools, string city) =>
-{
-    var result = await weatherTools.GetCurrentWeather(city);
-    return Results.Ok(new { city, weather = result });
-});
-
-app.MapGet("/weather/forecast/{city}", async ([FromServices] WeatherTools weatherTools, string city, int days = 5) =>
-{
-    var result = await weatherTools.GetWeatherForecast(city, days);
-    return Results.Ok(new { city, days, forecast = result });
-});
-
-// Add simple test endpoint
-app.MapGet("/test", () => "Weather MCP Web API is running!");
-
+// MCP Server handles stdio communication automatically regardless of mode
 app.Run();

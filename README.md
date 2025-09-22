@@ -43,6 +43,9 @@ This project follows Clean Architecture principles:
     ├── Tools/                        # MCP tool implementations
     └── Program.cs                    # Application startup
 ```
+<img width="3840" height="2858" alt="Weather MCP Server - End-to-End Architecture Flow" src="https://github.com/user-attachments/assets/f3db8a28-b43f-4e03-9fcd-518fcfd487cc" />
+
+<img width="2372" height="3840" alt="Weather MCP Server - Detailed Sequence Flow" src="https://github.com/user-attachments/assets/7e925d98-8384-4f30-bbcd-d4000a839a2c" />
 
 ## 🚀 Quick Start
 
